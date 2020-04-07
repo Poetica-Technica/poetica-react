@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+button, input, option, select {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.shakespeare-portrait {
+    height: auto;
+    width: 200px;
+    border-radius: 100px;
 }
 
 .App-logo {
@@ -35,4 +46,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.navigation a {
+  padding-right: 10px;
 }
