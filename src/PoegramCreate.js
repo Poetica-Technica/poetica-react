@@ -1,9 +1,9 @@
 // Enter new translation
 import React from 'react';
-import './TranslationCreate.css'
-import { getTranslation, saveTranslation, getTags } from './api.js';
+import './PoegramCreate.css'
+import { getPoegram, savePoegram, getTags } from './api.js';
 
-export default class TranslationCreate extends React.Component {
+export default class PoegramCreate extends React.Component {
   state = {
     original_text: '',
     translated: '',
@@ -17,7 +17,7 @@ export default class TranslationCreate extends React.Component {
   }
 
   handleTranslate = async () => {
-    const translatedText = await getTranslation(this.state.original_text);
+    const translatedText = await getPoegram(this.state.original_text);
     this.setState({ translated: translatedText.text, message: ''});
   }
 
@@ -26,8 +26,8 @@ export default class TranslationCreate extends React.Component {
       this.setState({ message: 'Null' });
       return;
     }
-    await saveTranslation(this.state.original_text, this.state.translated, this.state.tag);
-    this.setState({ message: 'Translation saved.' });
+    await savePoegram(this.state.original_text, this.state.translated, this.state.tag);
+    this.setState({ message: 'Poegram saved.' });
   }
 
   render() {
