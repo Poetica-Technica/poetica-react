@@ -3,7 +3,7 @@ import request from 'superagent';
 const URL='https://serene-springs-71594.herokuapp.com/api/'
 
 // Calls server API to translate original_text
-export async function getTranslation(original_text) {
+export async function getPoegram(original_text) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
         .get(`${URL}translations?text=${encodeURIComponent(original_text)}`)
@@ -20,7 +20,7 @@ export async function getTags() {
 }
 
 // Saves and tags thing
-export async function saveTranslation(original_text, translated, tag) {
+export async function savePoegram(original_text, translated, tag) {
     const translation = {
         original_text: original_text,
         translated: translated,
@@ -33,7 +33,7 @@ export async function saveTranslation(original_text, translated, tag) {
     return response;
 }
 
-export async function getTranslations(user_id, tag_id) {
+export async function getPoegrams(user_id, tag_id) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
     .get(`${URL}translations/search`)
@@ -42,7 +42,7 @@ export async function getTranslations(user_id, tag_id) {
     return response;
 }
 
-export async function searchTranslations(user_id, tag_id) {
+export async function searchPoegrams(user_id, tag_id) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
     .get(`${URL}translations/search/${user_id}/${tag_id}`)
@@ -51,7 +51,7 @@ export async function searchTranslations(user_id, tag_id) {
     return response;
 }
 
-export async function deleteTranslation(id) {
+export async function deletePoegrams(id) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
     .get(`${URL}translations/chair/${id}`)

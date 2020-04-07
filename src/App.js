@@ -7,11 +7,10 @@ import {
   Switch,
 } from 'react-router-dom';
 import About from './About.js';
-import RecentTranslations from './RecentTranslations.js';
-import UserTranslations from './UserTranslations.js';
+import UserPoegrams from './UserPoegrams.js';
 import Login from './Login.js';
-import Translate from './Translate.js';
 import Navigation from './Navigation.js';
+import PoegramCreate from'./PoegramCreate.js';
 
 const isLoggedIn = () => JSON.parse(localStorage.getItem('user'));
 
@@ -28,20 +27,19 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <header>
-          <h3>Bard of Avon</h3>
+          <h3>Poegram</h3>
         </header>
         <BrowserRouter>
         <Navigation user={this.state.user}/>
           <Switch>
             <Route exact path='/' render={() =>
               isLoggedIn()
-                ? <Translate />
+                ? <PoegramCreate />
                 : <Redirect to='login' />
             } />
             <Route path='/about' component={About} />
             <Route exact path="/login" render={(props) => <Login {...props} setUser={ this.setUser } user={this.state.user }/>} />
-            <Route path='/recent' component={RecentTranslations} />
-            <Route path='/client' component={UserTranslations} />
+            <Route path='/client' component={UserPoegrams} />
           </Switch>
         </BrowserRouter>
       </div>

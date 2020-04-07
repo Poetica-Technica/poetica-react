@@ -1,5 +1,11 @@
 // Search translations by tag 
 // Stretch: by user on recents?
+
+
+
+
+// Search not necessary for Poegram
+
 import React, { Component } from 'react'
 import { getTags } from './api';
 

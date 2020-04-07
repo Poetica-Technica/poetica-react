@@ -1,7 +1,7 @@
 
 import React from 'react';
 import SearchBar from './Search.js';
-import TranslationList from './TranslationList.js';
+import TranslationList from './PoegramList.js';
 import { searchTranslations } from './api.js';
 
 
