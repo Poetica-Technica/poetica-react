@@ -17,7 +17,7 @@ export default class TodoListLogin extends Component {
             const login = await request.post(`${URL}/api/v1/users/login`, {
                 username: this.state.username,
                 password: this.state.password
-            });
+            }).withCredentials();
             console.log('login response: ', login);
             localStorage.setItem('user', JSON.stringify(login.body));
             this.props.setUser(login.body);
