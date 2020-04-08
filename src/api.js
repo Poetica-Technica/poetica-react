@@ -6,7 +6,7 @@ const URL='http://localhost:7890'
 export async function createPoegram(author) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
-        .get(`${URL}/api/v1/create/author=${author}`)
+        .get(`${URL}/api/v1/create/?author=${author}`)
         .set('Authorization', user.token);
     return response.body;
 }

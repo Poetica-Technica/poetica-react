@@ -1,6 +1,6 @@
 // Enter new translation
 import React from 'react';
-import { createPoegram, getAllPoegrams } from './api.js';
+import { createPoegram, getAllPoegrams, getMyPoegrams } from './api.js';
 import RenderPoegram from './RenderPoegram.js'
 
 export default class PoegramCreate extends React.Component {
@@ -23,6 +23,11 @@ export default class PoegramCreate extends React.Component {
     this.setState({ data: allPoegrams });
   }
 
+  handleGetMy = async () => {    
+    const myPoegrams = await getMyPoegrams();
+    this.setState({ data: myPoegrams });
+  }
+
 
   render() {
     return (
@@ -34,6 +39,7 @@ export default class PoegramCreate extends React.Component {
           <button onClick={this.handleCreate}>Create a Poegram</button>
           <hr />
           <button onClick={this.handleGetAll}>Get All Poegrams</button>
+          {/* <button onClick={this.handleGetMy}>Get My Poegrams</button> */}
           <hr />
         </div>
         <div>
