@@ -1,61 +1,34 @@
 import request from 'superagent';
 
-const URL='https://serene-springs-71594.herokuapp.com/api/'
+// const URL='https://glacial-shelf-60937.herokuapp.com'
+const URL='http://localhost:7890'
 
-// Calls server API to translate original_text
-export async function getPoegram(original_text) {
+export async function createPoegram(author) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
-        .get(`${URL}translations?text=${encodeURIComponent(original_text)}`)
+        .get(`${URL}/api/v1/create/author=${author}`)
         .set('Authorization', user.token);
-    return response;
+    return response.body;
 }
 
-export async function getTags() {
+export async function getMyPoegrams() {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
-        .get(`${URL}tags`)
+        .get(`${URL}/api/v1/users/poegrams`)
         .set('Authorization', user.token);
-    return response;
+    return response.body;
 }
 
-// Saves and tags thing
-export async function savePoegram(original_text, translated, tag) {
-    const translation = {
-        original_text: original_text,
-        translated: translated,
-        tag: tag
-    };
-    const user = JSON.parse(localStorage.getItem('user'));
+export async function getAllPoegrams() {
     const response = await request
-        .post(`${URL}translations`, translation)
-        .set('Authorization', user.token);
-    return response;
-}
-
-export async function getPoegrams(user_id, tag_id) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const response = await request
-    .get(`${URL}translations/search`)
-    .set('Authorization', user.token);
-
-    return response;
-}
-
-export async function searchPoegrams(user_id, tag_id) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const response = await request
-    .get(`${URL}translations/search/${user_id}/${tag_id}`)
-    .set('Authorization', user.token);
-
-    return response;
+        .get(`${URL}/api/v1/poegrams`);
+    return response.body;
 }
 
 export async function deletePoegrams(id) {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
-    .get(`${URL}translations/chair/${id}`)
+    .delete(`${URL}/api/v1/poegrams/${id}`)
     .set('Authorization', user.token)
-
-    return response;
+    return response.body;
 }

@@ -7,10 +7,9 @@ import {
   Switch,
 } from 'react-router-dom';
 import About from './About.js';
-import UserPoegrams from './UserPoegrams.js';
 import Login from './Login.js';
 import Navigation from './Navigation.js';
-import PoegramCreate from'./PoegramCreate.js';
+import TestFile from'./TestFile.js';
 
 const isLoggedIn = () => JSON.parse(localStorage.getItem('user'));
 
@@ -34,12 +33,12 @@ export default class App extends React.Component {
           <Switch>
             <Route exact path='/' render={() =>
               isLoggedIn()
-                ? <PoegramCreate />
+                ? <TestFile />
                 : <Redirect to='login' />
             } />
             <Route path='/about' component={About} />
             <Route exact path="/login" render={(props) => <Login {...props} setUser={ this.setUser } user={this.state.user }/>} />
-            <Route path='/client' component={UserPoegrams} />
+            {/* <Route path='/client' component={UserPoegrams} /> */}
           </Switch>
         </BrowserRouter>
       </div>
