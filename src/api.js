@@ -5,15 +5,13 @@ const URL='http://localhost:7890'
 
 export async function createPoegram(author) {
     const response = await request
-        .get(`${URL}/api/v1/create/old/?author=${author}`).withCredentials()
+        .get(`${URL}/api/v1/create/?author=${author}`).withCredentials()
     return response.body;
 }
 
 export async function getMyPoegrams() {
-    const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
-        .get(`${URL}/api/v1/users/poegrams`)
-        .set('Authorization', user.token);
+        .get(`${URL}/api/v1/users/poegrams`).withCredentials()
     return response.body;
 }
 
@@ -24,9 +22,7 @@ export async function getAllPoegrams() {
 }
 
 export async function deletePoegrams(id) {
-    const user = JSON.parse(localStorage.getItem('user'));
     const response = await request
-    .delete(`${URL}/api/v1/poegrams/${id}`)
-    .set('Authorization', user.token)
+    .delete(`${URL}/api/v1/poegrams/${id}`).withCredentials()
     return response.body;
 }

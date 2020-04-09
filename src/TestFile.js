@@ -15,7 +15,8 @@ export default class PoegramCreate extends React.Component {
 
   handleCreate = async () => {    
     const createdPoegram = await createPoegram(this.state.author);
-    this.setState({ data: createdPoegram });
+    console.log('Poegram:',createdPoegram);
+    this.setState({ data: [createdPoegram] });
   }
 
   handleGetAll = async () => {    
