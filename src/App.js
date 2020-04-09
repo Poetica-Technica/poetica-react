@@ -26,7 +26,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <header>
-          <h3>Poegram</h3>
+          <h3><a href="/">Poegram</a></h3>
         </header>
         <BrowserRouter>
         <Navigation user={this.state.user}/>

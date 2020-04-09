@@ -6,6 +6,7 @@ import RenderPoegram from './RenderPoegram.js'
 export default class PoegramCreate extends React.Component {
   state = {
     author: 'Shakespeare',
+    format: 'json',
     data: [],
   }
 
@@ -13,9 +14,9 @@ export default class PoegramCreate extends React.Component {
     this.setState({});
   }
 
-  handleCreate = async () => {    
-    const createdPoegram = await createPoegram(this.state.author);
-    console.log('Poegram:',createdPoegram);
+  handleSubmit = async (e) => {    
+    e.preventDefault();
+    const createdPoegram = await createPoegram(this.state.author, this.state.format);
     this.setState({ data: [createdPoegram] });
   }
 
@@ -34,14 +35,49 @@ export default class PoegramCreate extends React.Component {
     return (
       <div className="container">
         <div className="poegram-create">
-          Desired author:
-          <input value={this.state.author} onChange={(e) => this.setState({ author: e.target.value })} />
+          <form id="myForm" onSubmit={this.handleSubmit}>
+            Desired author:
+            <input value={this.state.author} onChange={(e) => this.setState({ author: e.target.value })} />
+            <br />
+            <div className="radio-buttons">
+              <input
+                id="radio-json"
+                name="poegram-create"
+                type="radio"
+                onClick={(e) => this.setState({ format: e.target.value })}
+                value="json" 
+                defaultChecked />
+              <label htmlFor="radio-json">JSON</label>
+              <input
+                id="radio-image"
+                name="poegram-create"
+                type="radio"
+                onClick={(e) => this.setState({ format: e.target.value })}
+                value="image" />
+              <label htmlFor="radio-image">Image</label>
+              <input
+                id="radio-path"
+                name="poegram-create"
+                type="radio"
+                onClick={(e) => this.setState({ format: e.target.value })}
+                value="path" />
+              <label htmlFor="radio-path">Path</label>
+              <input
+                id="radio-tweet"
+                name="poegram-create"
+                type="radio"
+                onClick={(e) => this.setState({ format: e.target.value })}
+                value="tweet" />
+              <label htmlFor="radio-tweet">Tweet</label>
+            </div>
+            <button type="submit">Create a Poegram</button>
+          </form>
+
           <br />
-          <button onClick={this.handleCreate}>Create a Poegram</button>
-          <hr />
+          <br />
           <button onClick={this.handleGetAll}>Get All Poegrams</button>
+          <br />
           {/* <button onClick={this.handleGetMy}>Get My Poegrams</button> */}
-          <hr />
         </div>
         <div>
           {this.state.data.map(poegram => <RenderPoegram key={poegram._id} poegram={poegram} />)}

@@ -1,17 +1,17 @@
 import request from 'superagent';
 
-// const URL='https://glacial-shelf-60937.herokuapp.com'
-const URL='http://localhost:7890'
+const URL='https://poegram.herokuapp.com'
+// const URL='http://localhost:7890'
 
-export async function createPoegram(author) {
+export async function createPoegram(author, format) {
     const response = await request
-        .get(`${URL}/api/v1/create/?author=${author}`).withCredentials()
+        .get(`${URL}/api/v1/create/?author=${author}&format=${format}`).withCredentials()
     return response.body;
 }
 
 export async function getMyPoegrams() {
     const response = await request
-        .get(`${URL}/api/v1/users/poegrams`).withCredentials()
+        .get(`${URL}/api/v1/poegrams`).withCredentials()
     return response.body;
 }
 
