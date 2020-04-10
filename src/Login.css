@@ -1,12 +1,15 @@
 .login {
-    width: 400px;
-    margin: auto;
+    margin: 50px auto;
+    text-align: center;
 }
 
 .login input{
-    margin: auto;
+    margin: 10px auto;
     display: block;
+    min-width: 200px;
 }
-.shakespeare-portrait {
-    margin-bottom: 10px;
+
+.login button{
+    margin: 10px auto;
+    display: block;
 }

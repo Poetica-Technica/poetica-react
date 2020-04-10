@@ -8,12 +8,9 @@
 }
 
 .author {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
   font-size: .4em;
 }
-
-.serif-2 { font-family: 'Merriweather', Serif; }
-.serif-3 { font-family: 'Ovo', Serif; }
 
 .xs { font-size: .4em; }
 .s { font-size: .6em; }

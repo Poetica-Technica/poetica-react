@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import request from 'superagent';
 import './Login.css';
 
-const URL='https://poegram.herokuapp.com';
+// For use in local testing:
 // const URL='http://localhost:7890'
+const URL='https://poegram.herokuapp.com';
+
 
 export default class TodoListLogin extends Component {
     state = {
@@ -39,14 +41,27 @@ export default class TodoListLogin extends Component {
         }
     }
 
+    handleLogout = async () => {
+        try {
+            localStorage.clear();
+            this.props.setUser(null);
+            this.props.history.push('/');
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
     render() {
         return (
-            <div className="login">
-                <input placeholder="Username" value={ this.state.username } onChange={(e) => this.setState({ username: e.target.value})} />
-                <input placeholder="Password" value={ this.state.password } onChange={(e) => this.setState({ password: e.target.value})} />
+            <div className='login'>
+                <h4>Login</h4>
+                <input placeholder='Username' value={ this.state.username } onChange={(e) => this.setState({ username: e.target.value})} />
+                <input placeholder='Password' type='password' value={ this.state.password } onChange={(e) => this.setState({ password: e.target.value})} />
 
-                <button onClick={ this.handleSignUp }>Sign up</button>
                 <button onClick={ this.handleLogin }>Login</button>
+                <button onClick={ this.handleSignUp }>Sign up</button>
+                <br />
+                <button onClick={ this.handleLogout }>Logout</button>
    
             </div>
         )

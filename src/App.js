@@ -6,39 +6,41 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import About from './About.js';
 import Login from './Login.js';
 import Navigation from './Navigation.js';
-import TestFile from'./TestFile.js';
+import Home from'./Home.js';
+import About from'./About.js';
 
 const isLoggedIn = () => JSON.parse(localStorage.getItem('user'));
 
 export default class App extends React.Component {
+
   componentDidMount = () => {
     //if theres a user in local storage put it in state
     if (localStorage.getItem('user')){this.setState({user:localStorage.getItem('user')})};
   }
-  state={user: null}
-  setUser= (user) => {
-    this.setState({user:user})
+  
+  state = { user: null }
+  setUser = (user) => {
+    this.setState({ user: user })
   }
+
   render() {
     return (
-      <div className="App">
-        <header>
-          <h3><a href="/">Poegram</a></h3>
-        </header>
+      <div>
         <BrowserRouter>
-        <Navigation user={this.state.user}/>
+        <header>
+          <h3><a href="/">Poegram Demo</a></h3>
+          <Navigation user={this.state.user}/>
+        </header>
           <Switch>
             <Route exact path='/' render={() =>
               isLoggedIn()
-                ? <TestFile />
+                ? <Home />
                 : <Redirect to='login' />
             } />
-            <Route path='/about' component={About} />
             <Route exact path="/login" render={(props) => <Login {...props} setUser={ this.setUser } user={this.state.user }/>} />
-            {/* <Route path='/client' component={UserPoegrams} /> */}
+            <Route exact path="/about" render={(props) => <About {...props} setUser={ this.setUser } user={this.state.user }/>} />
           </Switch>
         </BrowserRouter>
       </div>

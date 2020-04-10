@@ -4,5 +4,46 @@
 }
 
 .navigation a {
-  padding-right: 10px;
+  margin: 0 10px;
+}
+
+header {
+  background-color: #eee;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header h3 a { 
+  text-decoration: none; 
+  color: #212529; 
+}
+
+.container {
+  margin: 50px 0;
+}
+
+.radio-buttons {
+  margin: 15px 0;
+}
+
+.radio-buttons label { 
+  margin-right: 1.5rem;
+}
+
+.radio-buttons input[type=radio] { 
+  margin-right: .4rem;
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+h4 {
+  margin-bottom: 20px;
+}
+
+.about {
+  margin: 0 auto;
+  max-width: 600px;
 }

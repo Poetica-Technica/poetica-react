@@ -9,8 +9,8 @@ export default class Navigation extends React.Component {
     }
     return (
         <div className="navigation">
-            <Link to="/">Test Page</Link>
-            <Link to="/about">About</Link>
+            <Link to="/about">What is a Poegram?</Link>
+            <span> | </span>
             <Link to="/login">Login</Link>
         </div>
     );
