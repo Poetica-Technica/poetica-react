@@ -7,18 +7,15 @@ export default class RenderPoegram extends Component {
 
     const format = this.props.format;
     const poegram = this.props.poegram;
-    // const divStyle = {
-    //   backgroundImage: `radial-gradient(circle at top right, ${poegram.colors[0]}, ${poegram.colors[1]})`
-    // };
+    const divStyle = {
+      backgroundImage: `radial-gradient(circle at top right, ${poegram.colors[0]}, ${poegram.colors[1]})`
+    };
 
     return (
       <div>
       { format === 'json' &&
         <div>
-          <div className="poegram-code">
-            <code>{ JSON.stringify(poegram) }</code>
-          </div>
-          <div className="poegram background-1">
+          <div className="poegram background-1" style={ divStyle }>
             <p className="poem">{ poegram.poemId.lines }</p>
             <p className="author">— { poegram.poemId.author }, from <em>{ poegram.poemId.title }</em></p>
           </div>
@@ -38,11 +35,11 @@ export default class RenderPoegram extends Component {
       }
 
       { format === 'tweet' &&
-        <p>@PoeticaTechnica sent a tweet!</p>
+        <p>@xyz sent a tweet!</p>
       }
 
       { format === 'tweetimage' &&
-        <p>@PoeticaTechnica tweeted an image!</p>
+        <p>@xyz tweeted an image!</p>
       }
     </div>
     )

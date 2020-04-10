@@ -10,6 +10,7 @@ import Login from './Login.js';
 import Navigation from './Navigation.js';
 import Home from'./Home.js';
 import About from'./About.js';
+import AllPoegrams from'./AllPoegrams.js';
 
 const isLoggedIn = () => JSON.parse(localStorage.getItem('user'));
 
@@ -41,6 +42,7 @@ export default class App extends React.Component {
             } />
             <Route exact path="/login" render={(props) => <Login {...props} setUser={ this.setUser } user={this.state.user }/>} />
             <Route exact path="/about" render={(props) => <About {...props} setUser={ this.setUser } user={this.state.user }/>} />
+            <Route exact path="/allPoegrams" render={(props) => <AllPoegrams {...props} setUser={ this.setUser } user={this.state.user }/>} />
           </Switch>
         </BrowserRouter>
       </div>

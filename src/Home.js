@@ -1,4 +1,3 @@
-// Enter new translation
 import React from 'react';
 import { createPoegram, getAllAuthors, getAllPoegrams, getMyPoegrams } from './api.js';
 import RenderPoegram from './RenderPoegram.js'
@@ -7,6 +6,7 @@ export default class Home extends React.Component {
   state = {
     author: 'random',
     format: 'json',
+    sentFormat: 'json',
     allAuthorsData: [],
     data: [],
   }
@@ -19,6 +19,7 @@ export default class Home extends React.Component {
   handleSubmit = async (e) => {    
     e.preventDefault();
     const createdPoegram = await createPoegram(this.state.author, this.state.format);
+    this.setState({ sentFormat: this.state.format });
     this.setState({ data: [createdPoegram] });
   }
 
@@ -56,13 +57,13 @@ export default class Home extends React.Component {
                 defaultChecked />
               <label htmlFor="radio-json">JSON</label>
 
-              <input
+              {/* <input
                 id="radio-image"
                 name="poegram-create"
                 type="radio"
                 onClick={(e) => this.setState({ format: e.target.value })}
                 value="image" />
-              <label htmlFor="radio-image">Image</label>
+              <label htmlFor="radio-image">Image</label> */}
 
               <input
                 id="radio-text"
@@ -88,21 +89,28 @@ export default class Home extends React.Component {
                 value="tweet" />
               <label htmlFor="radio-tweet">Tweet</label>
 
+              <input
+                id="radio-tweetimage"
+                name="poegram-create"
+                type="radio"
+                onClick={(e) => this.setState({ format: e.target.value })}
+                value="tweetimage" />
+              <label htmlFor="radio-tweetimage">Tweet Image</label>
+
             </div>
             <button type="submit">Create a Poegram</button>
           </form>
 
           <br />
           <br />
-          <h4>View Poegrams</h4>
-          <button onClick={this.handleGetAll}>Get All Poegrams</button>
-          <button onClick={this.handleGetMy}>Get My Poegrams</button>
           <br />
           {/* <button onClick={this.handleGetMy}>Get My Poegrams</button> */}
         </div>
-        <div>
-          {this.state.data.map(poegram => <RenderPoegram key={poegram._id} poegram={poegram} format={this.state.format} />)}
+        <div className='results'>
+          {this.state.data.map((poegram, index) => <RenderPoegram key={index} poegram={poegram} format={this.state.sentFormat} />)}
         </div>
+        <h4>Render All Poegrams</h4>
+        <p><a href="./AllPoegrams">Render all</a></p>
       </div>
     );
   }
