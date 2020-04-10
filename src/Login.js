@@ -17,6 +17,7 @@ export default class TodoListLogin extends Component {
                 username: this.state.username,
                 password: this.state.password
             }).withCredentials();
+            localStorage.setItem('user', JSON.stringify(login.body));
             this.props.setUser(login.body);
             this.props.history.push('/');
         } catch(e) {
@@ -30,6 +31,7 @@ export default class TodoListLogin extends Component {
                 username: this.state.username,
                 password: this.state.password,
             })
+            localStorage.setItem('user', JSON.stringify(signUp.body));
             this.props.setUser(signUp.body);
             this.props.history.push('/');
         } catch(e) {

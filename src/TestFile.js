@@ -60,7 +60,7 @@ export default class PoegramCreate extends React.Component {
                 name="poegram-create"
                 type="radio"
                 onClick={(e) => this.setState({ format: e.target.value })}
-                value="path" />
+                value="imagepath" />
               <label htmlFor="radio-path">Path</label>
               <input
                 id="radio-tweet"
