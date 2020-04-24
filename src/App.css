@@ -19,8 +19,18 @@ header h3 a {
   color: #212529; 
 }
 
-.container, .results {
-  margin: 50px 0;
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.results {
+  background-color: #eee;
+  padding: 20px;
 }
 
 .radio-buttons {
