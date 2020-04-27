@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RenderPoegramJSON from './RenderPoegramJSON.js'
 import './poegram.css'
 
 export default class RenderPoegram extends Component {
@@ -7,22 +8,11 @@ export default class RenderPoegram extends Component {
 
     const format = this.props.format;
     const poegram = this.props.poegram;
-    // const divStyle = {
-    //   backgroundImage: `radial-gradient(circle at top right, ${poegram.colors[0]}, ${poegram.colors[1]})`
-    // };
 
     return (
       <div>
       { format === 'json' &&
-        <div>
-          <div className="poegram-code">
-            <code>{ JSON.stringify(poegram) }</code>
-          </div>
-          <div className="poegram background-1">
-            <p className="poem">{ poegram.poemId.lines }</p>
-            <p className="author">— { poegram.poemId.author }, from <em>{ poegram.poemId.title }</em></p>
-          </div>
-        </div>
+        <RenderPoegramJSON poegram={poegram} />
       }
 
       { format === 'text' &&
@@ -34,7 +24,11 @@ export default class RenderPoegram extends Component {
       }
 
       { format === 'image' &&
-        <>poegram</>
+        <>
+        <p>Cmon image</p>
+        {/* { console.log('poegram is', poegram) } */}
+        <img src={ poegram } alt='poegram' />
+        </>
       }
 
       { format === 'tweet' &&

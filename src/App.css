@@ -31,6 +31,8 @@ hr {
 .results {
   background-color: #eee;
   padding: 20px;
+  height: calc(100vh - 150px);
+  overflow-y: scroll;
 }
 
 .radio-buttons {

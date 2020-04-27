@@ -37,7 +37,7 @@ export default class App extends React.Component {
           <Switch>
             <Route exact path='/' render={() =>
               isLoggedIn()
-                ? <Home />
+                ? <Home user={ this.state.user } />
                 : <Redirect to='login' />
             } />
             <Route exact path="/login" render={(props) => <Login {...props} setUser={ this.setUser } user={this.state.user }/>} />
