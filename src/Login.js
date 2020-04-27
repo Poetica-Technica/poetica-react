@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import { URL } from './api.js';
 import './Login.css';
-
-// For use in local testing:
-// const URL='http://localhost:7890'
-const URL='https://poegram.herokuapp.com';
 
 
 export default class TodoListLogin extends Component {

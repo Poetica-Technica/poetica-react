@@ -8,9 +8,15 @@ export default class RenderPoegram extends Component {
 
     const format = this.props.format;
     const poegram = this.props.poegram;
+    const index = this.props.index;
+    const length = this.props.length;
 
     return (
       <div>
+      { length > 1 &&
+        <h6>Object #{index + 1} of {length}</h6>
+      }  
+      
       { format === 'json' &&
         <RenderPoegramJSON poegram={poegram} />
       }
@@ -24,11 +30,7 @@ export default class RenderPoegram extends Component {
       }
 
       { format === 'image' &&
-        <>
-        <p>Cmon image</p>
-        {/* { console.log('poegram is', poegram) } */}
         <img src={ poegram } alt='poegram' />
-        </>
       }
 
       { format === 'tweet' &&
@@ -38,6 +40,11 @@ export default class RenderPoegram extends Component {
       { format === 'tweetimage' &&
         <p>@PoeticaTechnica tweeted an image!</p>
       }
+
+      { (length > 1 && index + 1 !== length) &&
+        <hr />
+      }  
+
     </div>
     )
   }

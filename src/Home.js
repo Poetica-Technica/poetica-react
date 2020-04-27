@@ -235,7 +235,7 @@ export default class Home extends React.Component {
               <h5>Results</h5>
               <hr />
                 {/* <RenderPoegram poegram={this.state.data} format={this.state.sentFormat} /> */}
-                { this.state.data.map((poegram, index) => <RenderPoegram key={index} poegram={poegram} format={this.state.sentFormat} /> )}
+                { this.state.data.map((poegram, index, arr) => <RenderPoegram key={index} poegram={poegram} format={this.state.sentFormat} index={index} length={arr.length} /> )}
             </div>
           </div>
         </div>

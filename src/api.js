@@ -1,7 +1,8 @@
 import request from 'superagent';
 
-const URL='https://poegram.herokuapp.com'
-// const URL='http://localhost:7890'
+export const URL='https://poegram.herokuapp.com'
+// For use in local testing:
+// export const URL='http://localhost:7890'
 
 const resType = (format) => { 
     if (format === 'image') return 'blob'
@@ -72,3 +73,4 @@ export async function deletePoegram(id) {
     .delete(`${URL}/api/v1/poegrams/${id}`).withCredentials()
     return response.body;
 }
+
