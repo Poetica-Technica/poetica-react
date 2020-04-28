@@ -29,7 +29,7 @@ export default class TodoListLogin extends Component {
             const signUp = await request.post(`${URL}/api/v1/users/signup`, {
                 username: this.state.username,
                 password: this.state.password,
-            })
+            }).withCredentials();
             localStorage.setItem('user', JSON.stringify(signUp.body));
             this.props.setUser(signUp.body);
             this.props.history.push('/');
@@ -64,8 +64,8 @@ export default class TodoListLogin extends Component {
                 <code>POST https://poegram.herokuapp.com/auth/signup</code>
                 <br />
                 <br />
-                <p className='api-note'>Include "username" and "password" key/value pairs in your JSON-formatted body.</p>
                 </p>
+                <p className='api-note'>Include "username" and "password" key/value pairs in your JSON-formatted body.</p>
                 <br />
                 <button onClick={ this.handleLogout }>Logout</button>
    
