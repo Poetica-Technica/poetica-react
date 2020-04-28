@@ -62,8 +62,6 @@ export async function getRandomPoegram(format) {
     const response = await request
         .get(`${URL}/api/v1/poegrams/random/?format=${format}`)
         .responseType(resType(format));
-        console.log('resType is', resType(format));
-        console.log('response is', response);
     if (format === 'text' || format === 'imagepath') return response.text;
     else return response.body;
 }

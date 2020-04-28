@@ -47,6 +47,10 @@ hr {
   margin-right: .4rem;
 }
 
+button + p {
+  margin-top: 20px;
+}
+
 button + button {
   margin-left: 10px;
 }
@@ -58,4 +62,9 @@ h4 {
 .about {
   margin: 0 auto;
   max-width: 600px;
+}
+
+.loading {
+  text-align: center;
+  mix-blend-mode: multiply;
 }

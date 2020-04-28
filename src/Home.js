@@ -11,7 +11,8 @@ export default class Home extends React.Component {
     allAuthorsData: [],
     data: [],
     dataArray: [],
-    username: ''
+    username: '',
+    loading: false
   }
 
   componentDidMount = async () => {
@@ -24,31 +25,35 @@ export default class Home extends React.Component {
     };
   }
 
-  handleSubmit = async (e) => {    
+  handleCreateSubmit = async (e) => {    
     e.preventDefault();
+    this.setState({ loading: true });
     const createdPoegram = await createPoegram(this.state.author, this.state.format);
-    this.setState({ data: [createdPoegram], sentFormat: this.state.format });
+    this.setState({ data: [createdPoegram], sentFormat: this.state.format, loading: false });
   }
 
   handleViewRandomSubmit = async (e) => {    
     e.preventDefault();
 
+    this.setState({ loading: true });
     const randomPoegram = await getRandomPoegram(this.state.viewRandomFormat);
     if (this.state.viewRandomFormat === 'image') {
       const imageUrl = URL.createObjectURL(randomPoegram);
       this.setState({ data: [imageUrl], sentFormat: this.state.viewRandomFormat });
     }
-    else this.setState({ data: [randomPoegram], sentFormat: this.state.viewRandomFormat });
+    else this.setState({ data: [randomPoegram], sentFormat: this.state.viewRandomFormat, loading: false });
   }
 
   handleGetAll = async () => {    
     const allPoegrams = await getAllPoegrams();
-    this.setState({ data: allPoegrams, sentFormat: 'json' });
+    this.setState({ loading: true });
+    this.setState({ data: allPoegrams, sentFormat: 'json', loading: false });
   }
   
   handleGetMy = async () => {    
     const myPoegrams = await getMyPoegrams();
-    this.setState({ data: myPoegrams, sentFormat: 'json' });
+    this.setState({ loading: true });
+    this.setState({ data: myPoegrams, sentFormat: 'json', loading: false });
   }
 
 
@@ -135,7 +140,7 @@ export default class Home extends React.Component {
             <br />
             <em>Currently logged in as { this.state.username }</em></p>
             <div className="poegram-create">
-              <form id="myForm" onSubmit={this.handleSubmit}>
+              <form id="myForm" onSubmit={this.handleCreateSubmit}>
 
                 <select id='authorList' onChange={(e) => { this.setState({ author: e.target.value }) }} value={this.state.author}>
                   <option value='random'>Random Author</option>
@@ -234,8 +239,14 @@ export default class Home extends React.Component {
             <div className='results'>
               <h5>Results</h5>
               <hr />
-                {/* <RenderPoegram poegram={this.state.data} format={this.state.sentFormat} /> */}
-                { this.state.data.map((poegram, index, arr) => <RenderPoegram key={index} poegram={poegram} format={this.state.sentFormat} index={index} length={arr.length} /> )}
+              { this.state.loading &&
+                <div className='loading'>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Loading" />
+                </div>
+              }
+              { !this.state.loading &&
+                this.state.data.map((poegram, index, arr) => <RenderPoegram key={index} poegram={poegram} format={this.state.sentFormat} index={index} length={arr.length} /> )
+              }
             </div>
           </div>
         </div>
