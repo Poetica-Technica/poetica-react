@@ -4,9 +4,9 @@ import RenderPoegram from './RenderPoegram.js'
 
 export default class Home extends React.Component {
   state = {
+    createAuthor: 'random',
+    createFormat: 'json',
     viewRandomFormat: 'json',
-    author: 'random',
-    format: 'json',
     sentFormat: '',
     allAuthorsData: [],
     data: [],
@@ -28,18 +28,21 @@ export default class Home extends React.Component {
   handleCreateSubmit = async (e) => {    
     e.preventDefault();
     this.setState({ loading: true });
-    const createdPoegram = await createPoegram(this.state.author, this.state.format);
-    this.setState({ data: [createdPoegram], sentFormat: this.state.format, loading: false });
+    const createdPoegram = await createPoegram(this.state.createAuthor, this.state.createFormat);
+    if (this.state.createFormat === 'image') {
+      const imageUrl = URL.createObjectURL(createdPoegram);
+      this.setState({ data: [imageUrl], sentFormat: this.state.createFormat, loading: false });
+    }
+    else this.setState({ data: [createdPoegram], sentFormat: this.state.createFormat, loading: false });
   }
 
   handleViewRandomSubmit = async (e) => {    
     e.preventDefault();
-
     this.setState({ loading: true });
     const randomPoegram = await getRandomPoegram(this.state.viewRandomFormat);
     if (this.state.viewRandomFormat === 'image') {
       const imageUrl = URL.createObjectURL(randomPoegram);
-      this.setState({ data: [imageUrl], sentFormat: this.state.viewRandomFormat });
+      this.setState({ data: [imageUrl], sentFormat: this.state.viewRandomFormat, loading: false });
     }
     else this.setState({ data: [randomPoegram], sentFormat: this.state.viewRandomFormat, loading: false });
   }
@@ -136,7 +139,7 @@ export default class Home extends React.Component {
             <h4>Create a new Poegram</h4>
             <form id="createForm" onSubmit={this.handleCreateSubmit}>
 
-              <select id='authorList' onChange={(e) => { this.setState({ author: e.target.value }) }} value={this.state.author}>
+              <select id='authorList' onChange={(e) => { this.setState({ createAuthor: e.target.value }) }} value={this.state.createAuthor}>
                 <option value='random'>Random Author</option>
                     {this.state.allAuthorsData.map((author, index) => <option key={index} value={author}>{author}</option>)}
               </select>
@@ -149,7 +152,7 @@ export default class Home extends React.Component {
                   id="radio-json"
                   name="poegram-create"
                   type="radio"
-                  onClick={(e) => this.setState({ format: e.target.value })}
+                  onClick={(e) => this.setState({ createFormat: e.target.value })}
                   value="json" 
                   defaultChecked />
                 JSON</label>
@@ -159,7 +162,7 @@ export default class Home extends React.Component {
                   id="radio-text"
                   name="poegram-create"
                   type="radio"
-                  onClick={(e) => this.setState({ format: e.target.value })}
+                  onClick={(e) => this.setState({ createFormat: e.target.value })}
                   value="text" />
                 Text</label>
 
@@ -168,7 +171,7 @@ export default class Home extends React.Component {
                   id="radio-path"
                   name="poegram-create"
                   type="radio"
-                  onClick={(e) => this.setState({ format: e.target.value })}
+                  onClick={(e) => this.setState({ createFormat: e.target.value })}
                   value="imagepath" />
                 Path</label>
 
@@ -177,7 +180,7 @@ export default class Home extends React.Component {
                   id="radio-image"
                   name="poegram-create"
                   type="radio"
-                  onClick={(e) => this.setState({ format: e.target.value })}
+                  onClick={(e) => this.setState({ createFormat: e.target.value })}
                   value="image" />
                 Image</label>
 
@@ -186,7 +189,7 @@ export default class Home extends React.Component {
                   id="radio-tweet"
                   name="poegram-create"
                   type="radio"
-                  onClick={(e) => this.setState({ format: e.target.value })}
+                  onClick={(e) => this.setState({ createFormat: e.target.value })}
                   value="tweet" />
                 Tweet</label>
 
@@ -195,7 +198,7 @@ export default class Home extends React.Component {
                   id="radio-tweetimage"
                   name="poegram-create"
                   type="radio"
-                  onClick={(e) => this.setState({ format: e.target.value })}
+                  onClick={(e) => this.setState({ createFormat: e.target.value })}
                   value="tweetimage" />
                 Tweet with image</label>
               </div>
@@ -204,7 +207,7 @@ export default class Home extends React.Component {
               <p className="html-equiv">API equivalent: 
               <br />
               <code>GET https://poegram.herokuapp.com
-                /api/v1/create/?author={this.state.author}&format={this.state.format}</code></p>
+                /api/v1/create/?author={this.state.createAuthor}&format={this.state.createFormat}</code></p>
               <p className="api-note">Note: Authentication required.
               <br />
               Currently logged in as <strong>{ this.state.username }</strong>.</p>

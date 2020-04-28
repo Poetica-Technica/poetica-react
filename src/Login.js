@@ -8,6 +8,7 @@ export default class TodoListLogin extends Component {
     state = {
         username: '',
         password: '',
+        loginError: ''
     }
 
     handleLogin = async () => {
@@ -21,6 +22,7 @@ export default class TodoListLogin extends Component {
             this.props.history.push('/');
         } catch(e) {
             console.error(e)
+            this.setState({ loginError: e.response.body.message })
         }
     }
 
@@ -35,6 +37,7 @@ export default class TodoListLogin extends Component {
             this.props.history.push('/');
         } catch(e) {
             console.error(e)
+            this.setState({ loginError: e.response.body.message })
         }
     }
 
@@ -57,6 +60,7 @@ export default class TodoListLogin extends Component {
 
                 <button onClick={ this.handleLogin }>Login</button>
                 <button onClick={ this.handleSignUp }>Sign up</button>
+                { this.state.loginError && <p className='login-error'>{this.state.loginError}</p> }
                 <p className="html-equiv">API equivalents: 
                 <br />
                 <code>POST https://poegram.herokuapp.com/auth/login</code>

@@ -85,3 +85,8 @@ h4 {
   text-align: center;
   mix-blend-mode: multiply;
 }
+
+.login-error {
+  color: red;
+  font-style: italic;
+}
