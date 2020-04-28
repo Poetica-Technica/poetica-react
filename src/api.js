@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-export const URL='https://radiant-gorge-25667.herokuapp.com'
+export const URL='https://poegram.herokuapp.com'
 // For use in local testing:
 // export const URL='http://localhost:7890'
 
