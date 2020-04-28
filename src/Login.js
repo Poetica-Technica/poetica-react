@@ -57,6 +57,15 @@ export default class TodoListLogin extends Component {
 
                 <button onClick={ this.handleLogin }>Login</button>
                 <button onClick={ this.handleSignUp }>Sign up</button>
+                <p className="html-equiv">API equivalents: 
+                <br />
+                <code>POST https://poegram.herokuapp.com/auth/login</code>
+                <br />
+                <code>POST https://poegram.herokuapp.com/auth/signup</code>
+                <br />
+                <br />
+                <p className='api-note'>Include "username" and "password" key/value pairs in your JSON-formatted body.</p>
+                </p>
                 <br />
                 <button onClick={ this.handleLogout }>Logout</button>
    

@@ -30,7 +30,7 @@ export default class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-        <header>
+        <header className="fixed-top">
           <h3><a href="/">Poegram Demo</a></h3>
           <Navigation user={this.state.user}/>
         </header>

@@ -8,7 +8,7 @@
 }
 
 header {
-  background-color: #eee;
+  background-color: #ddd;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -24,15 +24,26 @@ hr {
   margin-bottom: 2rem;
 }
 
-.container {
-  margin-top: 50px;
+body {
+  margin-top: 120px;
+  margin-bottom: 30px;
+}
+
+.sticky-top {
+  top: 120px;
 }
 
 .results {
-  background-color: #eee;
+  background-color: #f3f3f3;
   padding: 20px;
   height: calc(100vh - 150px);
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+@media only screen and (max-width: 575px) {
+  .results {
+    margin-top: 40px;
+  }
 }
 
 .radio-buttons {
@@ -62,6 +73,12 @@ h4 {
 .about {
   margin: 0 auto;
   max-width: 600px;
+}
+
+.api-note {
+  margin-top: 5px;
+  font-style: italic;
+  color: #e83e8c;
 }
 
 .loading {
