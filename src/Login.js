@@ -13,7 +13,7 @@ export default class TodoListLogin extends Component {
 
     handleLogin = async () => {
         try {
-            const login = await request.post(`${URL}/api/v1/users/login`, {
+            const login = await request.post(`${URL}/auth/login`, {
                 username: this.state.username,
                 password: this.state.password
             }).withCredentials();
@@ -28,7 +28,7 @@ export default class TodoListLogin extends Component {
 
     handleSignUp = async () => {
         try {
-            const signUp = await request.post(`${URL}/api/v1/users/signup`, {
+            const signUp = await request.post(`${URL}/auth/signup`, {
                 username: this.state.username,
                 password: this.state.password,
             }).withCredentials();
