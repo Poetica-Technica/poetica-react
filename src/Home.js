@@ -12,7 +12,8 @@ export default class Home extends React.Component {
     data: [],
     dataArray: [],
     username: '',
-    loading: false
+    loading: false,
+    error: null
   }
 
   componentDidMount = async () => {
@@ -27,13 +28,29 @@ export default class Home extends React.Component {
 
   handleCreateSubmit = async (e) => {    
     e.preventDefault();
-    this.setState({ loading: true });
-    const createdPoegram = await createPoegram(this.state.createAuthor, this.state.createFormat);
-    if (this.state.createFormat === 'image') {
-      const imageUrl = URL.createObjectURL(createdPoegram);
-      this.setState({ data: [imageUrl], sentFormat: this.state.createFormat, loading: false });
+    this.setState({ error: null, loading: true });
+    let createdPoegram;
+    try {
+      createdPoegram = await createPoegram(this.state.createAuthor, this.state.createFormat);
+      if (!createdPoegram.ok) {
+        throw new Error('Something went wrong:', createdPoegram.text);
+      }
+    } catch(err) {
+      console.log('Error:', err);
+      console.log('createdPoegram:', createdPoegram);
+      this.setState({ error: err, loading: false });
+      return;
     }
-    else this.setState({ data: [createdPoegram], sentFormat: this.state.createFormat, loading: false });
+    
+    if (this.state.createFormat === 'imagepath') {
+      const imageUrl = URL.createObjectURL(createdPoegram.text);
+      this.setState({ data: [imageUrl], sentFormat: this.state.createFormat, loading: false });
+    } else if (this.state.createFormat === 'text') {
+      this.setState({ data: [createdPoegram.text], sentFormat: this.state.createFormat, loading: false });
+    } else if (this.state.createFormat === 'image') {
+      const imageUrl = URL.createObjectURL(createdPoegram.body);
+      this.setState({ data: [imageUrl], sentFormat: this.state.createFormat, loading: false });
+    } else this.setState({ data: [createdPoegram.body], sentFormat: this.state.createFormat, loading: false });
   }
 
   handleViewRandomSubmit = async (e) => {    
@@ -241,10 +258,16 @@ export default class Home extends React.Component {
                   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Loading" />
                 </div>
               }
-              { !this.state.loading &&
+              { this.state.error &&
+                  <>
+                    <h3>Error!</h3>
+                    <p>{ this.state.error.name }: { this.state.error.message }</p>
+                  </>
+              }
+              { (!this.state.loading && !this.state.error) &&
                 this.state.data.map((poegram, index, arr) => <RenderPoegram key={index} poegram={poegram} format={this.state.sentFormat} index={index} length={arr.length} /> )
               }
-              { this.state.sentFormat === '' && !this.state.loading &&
+              { (!this.state.loading && !this.state.error && this.state.sentFormat === '') &&
                   <p><em>View or create a Poegram from the buttons at left to see results here.</em></p>
               }
             </div>

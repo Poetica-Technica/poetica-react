@@ -21,8 +21,7 @@ export async function createPoegram(author, format) {
         .get(`${URL}/api/v1/create/?author=${author}&format=${format}`)
         .responseType(resType(format))
         .withCredentials();
-    if (format === 'text' || format === 'imagepath') return response.text;
-    else return response.body;
+    return response;
 }
 
 export async function getMyPoegrams() {
@@ -59,11 +58,10 @@ export async function getRandomPoegram(format) {
     //   this.setState({ data: data, sentFormat: this.state.viewRandomFormat })
     // })
 
-    const response = await request
-        .get(`${URL}/api/v1/poegrams/random/?format=${format}`)
-        .responseType(resType(format));
-    if (format === 'text' || format === 'imagepath') return response.text;
-    else return response.body;
+    return fetch(`${URL}/api/v1/poegrams/random/?format=${format}`).then(res => res.json());
+    // console.log('response:', response);
+    // if (format === 'text' || format === 'imagepath') return response.text;
+    // else return response.body;
 }
 
 export async function deletePoegram(id) {

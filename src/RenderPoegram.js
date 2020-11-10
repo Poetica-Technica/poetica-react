@@ -21,7 +21,7 @@ export default class RenderPoegram extends Component {
         <RenderPoegramJSON poegram={poegram} />
       }
 
-      { format === 'text' || format === 'imagepath' &&
+      { (format === 'text' || format === 'imagepath') &&
         <p>{ poegram }</p>
       }
 
